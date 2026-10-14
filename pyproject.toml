@@ -1,0 +1,37 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "derivpricing"
+version = "1.0.0"
+description = "Monte Carlo, Fourier and finite-difference pricing for equity derivatives (GBM, Heston, Merton jump-diffusion) and short-rate models (CIR, G2++)."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "Khush Paliwal" }]
+keywords = ["option pricing", "monte carlo", "heston", "jump diffusion", "finite difference", "CIR", "G2++", "quantitative finance"]
+dependencies = ["numpy>=1.24", "scipy>=1.11", "matplotlib>=3.7"]
+
+[project.optional-dependencies]
+dev = ["pytest>=7.4", "ruff>=0.4", "nbformat>=5.9", "nbconvert>=7.0", "ipykernel>=6.0"]
+
+[project.scripts]
+derivpricing-validate = "derivpricing.validation:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+filterwarnings = ["ignore::RuntimeWarning"]
+
+[tool.ruff]
+line-length = 120
+target-version = "py310"
+extend-exclude = ["notebooks"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP", "NPY"]
+ignore = ["E501", "E741", "E702"]
